@@ -2,12 +2,11 @@ package com.example.api.distributor.enums;
 
 public enum OrderStatus {
 
-  PENDING(0, "Pending"),
-  ACCOMPLISHED(1, "Accomplished"),
-  CANCELED(2, "Canceled"),
-  FINISHED(3, "Finished");
+  PENDING(0, "Pending"), ACCOMPLISHED(1, "Accomplished"), CANCELED(2, "Canceled"), FINISHED(3,
+      "Finished");
 
   private int cod;
+
   private String description;
 
   OrderStatus(int id, String description) {
@@ -32,9 +31,6 @@ public enum OrderStatus {
         return x;
       }
     }
-
     throw new IllegalArgumentException("Invalid ID" + cod);
-
-
   }
 }
