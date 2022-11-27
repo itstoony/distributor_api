@@ -1,4 +1,4 @@
-package com.example.distribuidora;
+package br.com.api.distributor.model;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
