@@ -24,8 +24,7 @@ public class Product {
   @Id
   @GeneratedValue
   private Long id;
-
-
+  
   private String name;
 
   @ManyToMany

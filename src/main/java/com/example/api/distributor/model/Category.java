@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
 @Entity
-@Data // create getters and setters
-@EqualsAndHashCode // pre-write hashcode and equals
 @NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
 @Table(name = "category")
 public class Category {
@@ -29,5 +29,5 @@ public class Category {
     @JsonIgnore
     @ManyToMany(mappedBy = "category")
     private List<Product> productList;
-
+    
 }
