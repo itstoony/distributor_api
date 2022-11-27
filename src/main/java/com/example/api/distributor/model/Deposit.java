@@ -6,8 +6,7 @@ import java.util.List;
 public class Deposit {
 
   private Long id;
-  private List<?> inventory = new ArrayList<>();
-  private List<?> products = new ArrayList<>();
-  private String adress;
+  private List<Product> products = new ArrayList<>();
+  private String address;
 
 }

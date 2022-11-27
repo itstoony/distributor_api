@@ -6,9 +6,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Entity
+@Data // create getters and setters
+@EqualsAndHashCode // pre-write hashcode and equals
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "product")
 public class Product {
 
@@ -16,13 +25,10 @@ public class Product {
   @GeneratedValue
   private Long id;
 
-//  @Size(min = 1, max = 255, message = "Category Name Required.")
+
   private String name;
 
   @ManyToMany
   private List<Category> category;
 
-  public Product(){
-
-  }
 }
