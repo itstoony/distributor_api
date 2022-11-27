@@ -1,34 +1,33 @@
 package com.example.api.distributor.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Table(name = "category")
 public class Category {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private String name;
-  @ManyToMany
-  private List<Product> productList;
+    @Column(name = "name")
+    @NotEmpty(message = "Category name shouldn't be empty")
+    private String name;
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Category(){
-
-  }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "category")
+    private List<Product> productList;
+    
 }
