@@ -1,4 +1,4 @@
-package com.example.api.distributor.enums;
+package distribuitor.itstoony.com.github.model.enums;
 
 public enum OrderStatus {
 
