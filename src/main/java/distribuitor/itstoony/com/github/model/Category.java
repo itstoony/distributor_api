@@ -1,6 +1,5 @@
-package com.example.api.distributor.model;
+package distribuitor.itstoony.com.github.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,8 +26,7 @@ public class Category {
     @NotEmpty(message = "Category name shouldn't be empty")
     private String name;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "category")
-    private List<Product> productList;
-    
+    private List<Product> productList = new ArrayList<>();
+
 }

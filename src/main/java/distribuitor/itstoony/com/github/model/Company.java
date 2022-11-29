@@ -1,4 +1,4 @@
-package com.example.api.distributor.model;
+package distribuitor.itstoony.com.github.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,5 +15,6 @@ public class Company {
   private String cnpj;
   private String titular;
   private Double capital;
+  private Adress adress;
 
 }

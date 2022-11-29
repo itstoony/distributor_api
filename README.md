@@ -31,8 +31,8 @@ $ mvn clean install
 
 ## 👨🏻‍💻 Developers 👨🏻‍💻
 
-| [<img src="https://avatars.githubusercontent.com/u/102700833?v=4" width=115><br><sub>Tony Hilario</sub>](https://github.com/itstoony) | [<img src="https://avatars.githubusercontent.com/u/110507618?v=4" width=115><br><sub>Leonardo Guedes</sub>](https://github.com/LeoGuedex) |
-| :---: | :---: |
+| [<img src="https://avatars.githubusercontent.com/u/102700833?v=4" width=115><br><sub>Tony Rene</sub>](https://github.com/itstoony) | [<img src="https://avatars.githubusercontent.com/u/110507618?v=4" width=115><br><sub>Leonardo Guedes</sub>](https://github.com/LeoGuedex) |
+|:---------------------------------------------------------------------------------------------------------------------------------:| :---: |
 
 
 ## 📜 License
