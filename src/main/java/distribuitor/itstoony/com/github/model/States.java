@@ -5,30 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "clients")
-public class Clients {
+@EqualsAndHashCode
+@Table(name = "states")
+public class States {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    @Column(name = "name")
+    private String name;
 
-    @CPF
-    private String cpf;
 
-    private LocalDate dataDeCadastro;
-
-    @OneToOne(mappedBy = "clients")
-    private Adress adress;
-
+    @OneToMany(mappedBy = "states")
+    private List<City> city = new ArrayList<>();
 }

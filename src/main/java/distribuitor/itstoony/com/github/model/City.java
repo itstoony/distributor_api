@@ -5,30 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
-
-import java.time.LocalDate;
 
 @Entity
 @Data
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "clients")
-public class Clients {
+@EqualsAndHashCode
+@Table(name = "city")
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    @Column(name = "name")
+    private String name;
 
-    @CPF
-    private String cpf;
-
-    private LocalDate dataDeCadastro;
-
-    @OneToOne(mappedBy = "clients")
-    private Adress adress;
-
+    @ManyToOne
+    @JoinColumn( name = "states_id")
+    private States states;
 }
