@@ -27,6 +27,8 @@ public class Deposit {
 
 
     @OneToOne(mappedBy = "deposit")
-    private Adress address;
+    private Address address;
+
+
 
 }

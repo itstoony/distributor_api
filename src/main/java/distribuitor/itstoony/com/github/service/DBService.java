@@ -1,18 +1,15 @@
 package distribuitor.itstoony.com.github.service;
 
-import distribuitor.itstoony.com.github.model.Adress;
-import distribuitor.itstoony.com.github.model.Clients;
-import distribuitor.itstoony.com.github.repository.AdressRepository;
-import distribuitor.itstoony.com.github.repository.ClientsRepository;
-import distribuitor.itstoony.com.github.repository.ProductRepository;
+import distribuitor.itstoony.com.github.repository.*;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-
+//TODO: Populate database
 @Service
+@NoArgsConstructor
 public class DBService {
+
 
     @Autowired
     private ClientsRepository clientsRepository;
@@ -21,21 +18,36 @@ public class DBService {
     private ProductRepository productRepository;
 
     @Autowired
-    private AdressRepository adress;
+    private AddressRepository addressRepository;
 
-    public DBService(){
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    }
+    @Autowired
+    private StatesRepository statesRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private DepositRepository depositRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
 
     public void populateDatabase() {
 
-        Clients c1 = new Clients(null, "Tony", "895.428.810-37", LocalDate.now(), null );
-        Clients c2 = new Clients(null, "Tony", "895.428.810-37", LocalDate.now(), null );
-        Clients c3 = new Clients(null, "Tony", "895.428.810-37", LocalDate.now(), null );
-        clientsRepository.saveAll(Arrays.asList(c1,c2,c3));
-
-        Adress ad1 = new Adress();
-
+//        ResidencialAddress ad = new ResidencialAddress();
+//        AddressDto dto = AddressDto.getAddress("26060230");
+//        ad.setStreet(dto.getLogradouro());
+//        ad.setNeighborhood(dto.getBairro());
+//        ad.setCity(dto.getLocalidade());
+//        ad.setStates(dto.getUf());
+//        residencialAddressRepository.save(ad);
+//
+//        Clients c1 = new Clients("Tony", "123.123.123-23", ad);
+//        clientsRepository.save(c1);
 
     }
 }

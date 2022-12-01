@@ -31,6 +31,6 @@ public class Company {
     private Double capital;
 
     @OneToOne(mappedBy = "company")
-    private Adress adress;
+    private Address address;
 
 }

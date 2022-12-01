@@ -1,5 +1,6 @@
 package distribuitor.itstoony.com.github.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +23,10 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     private LocalDate orderDate;
 
+    @JsonIgnore
     private Double totalValue;
 
     @ManyToOne
@@ -33,5 +36,10 @@ public class Orders {
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<ItemsOrders> items = new ArrayList<>();
 
+    public Orders(Clients client){
+        this.clients = client;
+        this.orderDate = LocalDate.now();
+        this.totalValue = 0.0;
+    }
 
 }

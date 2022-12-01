@@ -1,19 +1,20 @@
 package distribuitor.itstoony.com.github.model;
 
+//import distribuitor.itstoony.com.github.model.address.ResidencialAddress;
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "clients")
 public class Clients {
 
@@ -21,7 +22,8 @@ public class Clients {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    @NotEmpty(message = "Name shouldn't be empty")
+    private String name;
 
     @CPF
     private String cpf;
@@ -29,6 +31,6 @@ public class Clients {
     private LocalDate dataDeCadastro;
 
     @OneToOne(mappedBy = "clients")
-    private Adress adress;
+    private Address address;
 
 }

@@ -1,7 +1,6 @@
 package distribuitor.itstoony.com.github.config;
 
 import distribuitor.itstoony.com.github.service.DBService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +16,9 @@ public class PopulateDbConfig {
     private String strategy;
 
     @Bean
-    public boolean populateDatabase(){
+    public boolean populateDatabase() {
 
-        if (!"create-drop".equals(strategy)){
+        if (!"create-drop".equals(strategy)) {
             return false;
         }
         dbService.populateDatabase();
