@@ -1,17 +1,20 @@
 package distribuitor.itstoony.com.github.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import distribuitor.itstoony.com.github.model.Costumer;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@Builder
 @Getter
+@NoArgsConstructor
 public class ClientsDto {
 
-    private final String name;
+    private String name;
 
-    private final String cpf;
+    private String cpf;
 
-    private final String cep;
+    private String cep;
+
+    public ClientsDto(Costumer client){}
 }

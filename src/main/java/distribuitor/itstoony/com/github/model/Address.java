@@ -37,7 +37,7 @@ public class Address {
 
     @JsonIgnore
     @OneToOne
-    private Clients clients;
+    private Costumer costumer;
 
     @JsonIgnore
     @OneToOne

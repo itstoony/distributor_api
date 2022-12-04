@@ -31,13 +31,13 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "clients_id")
-    private Clients clients;
+    private Costumer costumer;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<ItemsOrders> items = new ArrayList<>();
 
-    public Orders(Clients client){
-        this.clients = client;
+    public Orders(Costumer client){
+        this.costumer = client;
         this.orderDate = LocalDate.now();
         this.totalValue = 0.0;
     }

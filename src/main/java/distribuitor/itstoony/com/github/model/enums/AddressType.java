@@ -2,7 +2,7 @@ package distribuitor.itstoony.com.github.model.enums;
 
 public enum AddressType {
 
-    CLIENTS(0, "Clients"),
+    CLIENTS(0, "Costumer"),
     DEPOSIT(1, "Deposit"),
     COMPANY(2, "Company");
 

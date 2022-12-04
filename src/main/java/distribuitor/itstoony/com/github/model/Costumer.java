@@ -15,22 +15,23 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clients")
-public class Clients {
+@Table(name = "costumer")
+public class Costumer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty(message = "Name shouldn't be empty")
+    @Column(name = "name")
     private String name;
 
     @CPF
     private String cpf;
 
-    private LocalDate dataDeCadastro;
+    private LocalDate registrationDate;
 
-    @OneToOne(mappedBy = "clients")
+    @OneToOne(mappedBy = "costumer")
     private Address address;
 
 }
