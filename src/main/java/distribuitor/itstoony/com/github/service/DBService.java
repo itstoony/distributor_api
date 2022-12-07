@@ -13,7 +13,6 @@ public class DBService {
     @Autowired
     private CostumerService costumerService;
 
-
     public void populateDatabase() {
 
         CostumerDto cd1 = new CostumerDto("Renato Enrico Monteiro", "02388223890", "88504461");
@@ -27,5 +26,7 @@ public class DBService {
         CostumerDto cd3 = new CostumerDto("Joana Evelyn Adriana Freitas", "27514241639", "65058650");
         Costumer c3 = costumerService.fromDto(cd3);
         costumerService.insert(c3);
+
     }
+
 }

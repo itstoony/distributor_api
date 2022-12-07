@@ -10,9 +10,7 @@ import lombok.*;
 public class CostumerDto {
 
     private String name;
-
     private String cpf;
-
     private String cep;
 
 }

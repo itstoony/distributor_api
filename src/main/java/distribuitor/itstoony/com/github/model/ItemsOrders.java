@@ -35,5 +35,4 @@ public class ItemsOrders {
     @JoinColumn(name = "product_id")
     private Product product;
 
-
 }

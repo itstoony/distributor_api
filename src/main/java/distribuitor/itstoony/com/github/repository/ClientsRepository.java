@@ -12,10 +12,12 @@ import org.springframework.stereotype.Repository;
 public interface ClientsRepository extends JpaRepository<Costumer, Long> {
 
     Page<Costumer> findAllByName(String name, Pageable pageable);
+
     Costumer findAllByName(String name);
 
     Page<Costumer> findByName(String name, Pageable pageable);
 
     @Query("select u.name, u.cpf, u.address.zipcode from Costumer u where u.name like %:name%")
     Page<Costumer> findByPageableClientsName(@Param("name") String name, Pageable clientsRequest);
+
 }

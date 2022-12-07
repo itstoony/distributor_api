@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration // read first
+@Configuration
 public class PopulateDbConfig {
 
     @Autowired
@@ -17,15 +17,14 @@ public class PopulateDbConfig {
 
     @Bean
     public boolean populateDatabase() {
-
         if (!"create-drop".equals(strategy)) {
             return false;
         }
+
         dbService.populateDatabase();
+
         return true;
+
     }
 
-
 }
-
-

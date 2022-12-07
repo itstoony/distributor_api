@@ -1,6 +1,5 @@
 package distribuitor.itstoony.com.github.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import distribuitor.itstoony.com.github.model.enums.AddressType;
 import jakarta.persistence.*;
@@ -43,12 +42,11 @@ public class Address {
     @OneToOne
     private Deposit deposit;
 
-
     @JsonIgnore
     @OneToOne
     private Company company;
 
-
     @JsonIgnore
     private AddressType addressType;
+
 }

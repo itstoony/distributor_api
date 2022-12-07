@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,9 @@ public class CostumerService {
 
     @Autowired
     private AddressService addressService;
+
     @Autowired
     private ClientsRepository clientsRepository;
-
 
     public Costumer fromDto(CostumerDto dto) {
 
@@ -41,6 +40,7 @@ public class CostumerService {
 
         address.setCostumer(costumer);
         addressService.setAddressType(costumer.getAddress());
+
         return costumer;
     }
 
@@ -62,10 +62,13 @@ public class CostumerService {
 
     public List<CostumerDto> findAll() {
         List<Costumer> listClients = clientsRepository.findAll();
+
         List<CostumerDto> listDto = new ArrayList<>();
+
         for (Costumer c : listClients) {
             listDto.add(ConvertToDto(c));
         }
+
         return listDto;
     }
 
@@ -84,6 +87,7 @@ public class CostumerService {
 
 
     public void deleteById(Long id) {
+        findById(id);
         clientsRepository.deleteById(id);
     }
 
@@ -99,10 +103,13 @@ public class CostumerService {
         AddressDto addressDto = addressService.findCepDto(updated.getCep());
         Address address = addressService.fromDto(addressDto);
         addressService.save(address);
+
         Costumer costumer = findById(id);
         costumer.setName(updated.getName());
         costumer.setCpf(updated.getCpf());
         costumer.setAddress(address);
+
         return costumer;
     }
+
 }

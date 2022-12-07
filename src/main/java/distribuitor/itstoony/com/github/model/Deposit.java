@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +24,7 @@ public class Deposit {
     @OneToMany(mappedBy = "deposit")
     private List<Product> products = new ArrayList<>();
 
-
     @OneToOne(mappedBy = "deposit")
     private Address address;
-
-
 
 }

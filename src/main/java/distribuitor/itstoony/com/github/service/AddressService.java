@@ -14,11 +14,11 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
+    /*
+     * Consuming "via cep" webservice to get location by zipcode "cep"
+     * https://viacep.com.br/
+     */
     public AddressDto findCepDto(String cep) {
-        /*
-         * Consuming "via cep" webservice to get location by zipcode "cep"
-         * https://viacep.com.br/
-         */
         String url = "https://viacep.com.br/ws/" + cep + "/json/";
         return new RestTemplate().getForObject(url, AddressDto.class);
     }
@@ -46,4 +46,5 @@ public class AddressService {
     public void save(Address address) {
         addressRepository.save(address);
     }
+
 }

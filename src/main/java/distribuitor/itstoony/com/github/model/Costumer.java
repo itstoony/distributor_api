@@ -1,11 +1,9 @@
 package distribuitor.itstoony.com.github.model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
-
 import java.time.LocalDate;
 
 @Entity
