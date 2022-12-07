@@ -14,7 +14,7 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public AddressDto findCep(String cep) {
+    public AddressDto findCepDto(String cep) {
         /*
          * Consuming "via cep" webservice to get location by zipcode "cep"
          * https://viacep.com.br/
@@ -33,16 +33,17 @@ public class AddressService {
         }
     }
 
-    public Address fromDto(AddressDto dto){
-
-        Address address = Address.builder()
+    public Address fromDto(AddressDto dto) {
+        return Address.builder()
                 .city(dto.getLocalidade())
                 .states(dto.getUf())
                 .neighborhood(dto.getBairro())
                 .street(dto.getLogradouro())
                 .zipcode(dto.getCep())
                 .build();
-        return address;
     }
 
+    public void save(Address address) {
+        addressRepository.save(address);
+    }
 }

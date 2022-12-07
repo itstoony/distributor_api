@@ -3,8 +3,7 @@ package distribuitor.itstoony.com.github.service;
 import distribuitor.itstoony.com.github.model.Address;
 import distribuitor.itstoony.com.github.model.Costumer;
 import distribuitor.itstoony.com.github.model.dto.AddressDto;
-import distribuitor.itstoony.com.github.model.dto.ClientsDto;
-import distribuitor.itstoony.com.github.repository.AddressRepository;
+import distribuitor.itstoony.com.github.model.dto.CostumerDto;
 import distribuitor.itstoony.com.github.repository.ClientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientsService {
-
-    @Autowired
-    private AddressRepository addressRepository;
+public class CostumerService {
 
     @Autowired
     private AddressService addressService;
@@ -30,9 +26,9 @@ public class ClientsService {
     private ClientsRepository clientsRepository;
 
 
-    public Costumer fromDto(ClientsDto dto) {
+    public Costumer fromDto(CostumerDto dto) {
 
-        AddressDto addressDto = addressService.findCep(dto.getCep());
+        AddressDto addressDto = addressService.findCepDto(dto.getCep());
 
         Address address = addressService.fromDto(addressDto);
 
@@ -51,7 +47,7 @@ public class ClientsService {
     @Transactional
     public void insert(Costumer costumer) {
         costumer.setId(null);
-        addressRepository.save(costumer.getAddress());
+        addressService.save(costumer.getAddress());
         clientsRepository.save(costumer);
     }
 
@@ -60,18 +56,21 @@ public class ClientsService {
         return clients.orElseThrow(() -> new RuntimeException("Object not found"));
     }
 
-    public List<ClientsDto> findAll() {
-        List<Costumer> listClients = clientsRepository.findAll();
-        List<ClientsDto> listDto = new ArrayList<>();
+    public Optional<Costumer> findByIdOptional(Long id) {
+        return clientsRepository.findById(id);
+    }
 
-        for (Costumer c : listClients){
+    public List<CostumerDto> findAll() {
+        List<Costumer> listClients = clientsRepository.findAll();
+        List<CostumerDto> listDto = new ArrayList<>();
+        for (Costumer c : listClients) {
             listDto.add(ConvertToDto(c));
         }
         return listDto;
     }
 
-    private ClientsDto ConvertToDto(Costumer costumer) {
-        return   ClientsDto.builder()
+    private CostumerDto ConvertToDto(Costumer costumer) {
+        return CostumerDto.builder()
                 .cep(costumer.getAddress().getZipcode())
                 .name(costumer.getName())
                 .cpf(costumer.getCpf())
@@ -79,20 +78,31 @@ public class ClientsService {
     }
 
     public Page<Costumer> findByPageableClientsName(String name, Integer page, Integer linePerPage, String orderBy, String direction) {
-
         PageRequest clientsRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return clientsRepository.findByPageableClientsName(name, clientsRequest);
-
-    }
-
-    public Costumer findByClientsName(String name) {
-        Optional<Costumer> clients = Optional.ofNullable(clientsRepository.findAllByName(name));
-        return clients.orElseThrow(() -> new RuntimeException("Object not found"));
-    }
-
-    public Page<ClientsDto> pageToDto(Page<Costumer> page) {
-        return page.map(ClientsDto::new);
     }
 
 
+    public void deleteById(Long id) {
+        clientsRepository.deleteById(id);
+    }
+
+    public CostumerDto toDto(Costumer customer) {
+        return CostumerDto.builder()
+                .name(customer.getName())
+                .cep(customer.getAddress().getZipcode())
+                .cpf(customer.getCpf())
+                .build();
+    }
+
+    public Costumer update(Long id, CostumerDto updated) {
+        AddressDto addressDto = addressService.findCepDto(updated.getCep());
+        Address address = addressService.fromDto(addressDto);
+        addressService.save(address);
+        Costumer costumer = findById(id);
+        costumer.setName(updated.getName());
+        costumer.setCpf(updated.getCpf());
+        costumer.setAddress(address);
+        return costumer;
+    }
 }

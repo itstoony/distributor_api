@@ -1,6 +1,5 @@
 package distribuitor.itstoony.com.github.model.dto;
 
-import distribuitor.itstoony.com.github.model.Costumer;
 import lombok.*;
 
 @Data
@@ -8,7 +7,7 @@ import lombok.*;
 @Builder
 @Getter
 @NoArgsConstructor
-public class ClientsDto {
+public class CostumerDto {
 
     private String name;
 
@@ -16,5 +15,4 @@ public class ClientsDto {
 
     private String cep;
 
-    public ClientsDto(Costumer client){}
 }

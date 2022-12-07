@@ -1,6 +1,5 @@
 package distribuitor.itstoony.com.github.model;
 
-//import distribuitor.itstoony.com.github.model.address.ResidencialAddress;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
