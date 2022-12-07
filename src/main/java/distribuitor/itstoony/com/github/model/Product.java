@@ -6,13 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data // create getters and setters
-@EqualsAndHashCode // pre-write hashcode and equals
+@Data
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")
@@ -33,6 +32,10 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<ItemsOrders> order = new ArrayList<>();
+
+    @ManyToOne
+    private Deposit deposit;
+
     @ManyToMany
     @JoinTable(
             name = "product_category",

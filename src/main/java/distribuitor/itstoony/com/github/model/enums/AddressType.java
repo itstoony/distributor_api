@@ -1,17 +1,16 @@
 package distribuitor.itstoony.com.github.model.enums;
 
-public enum OrderStatus {
+public enum AddressType {
 
-    PENDING(0, "Pending"),
-    ACCOMPLISHED(1, "Accomplished"),
-    CANCELED(2, "Canceled"),
-    FINISHED(3, "Finished");
+    CLIENTS(0, "Costumer"),
+    DEPOSIT(1, "Deposit"),
+    COMPANY(2, "Company");
 
-    private int cod;
+    private final int cod;
 
-    private String description;
+    private final String description;
 
-    OrderStatus(int id, String description) {
+    AddressType(int id, String description) {
         this.cod = id;
         this.description = description;
     }
@@ -24,16 +23,19 @@ public enum OrderStatus {
         return description;
     }
 
-    public static OrderStatus toEnum(Integer cod) {
+    public static AddressType toEnum(Integer cod) {
         if (cod == null) {
             return null;
         }
-        for (OrderStatus x : OrderStatus.values()) {
+
+        for (AddressType x : AddressType.values()) {
             if (cod.equals(x.getCod())) {
                 return x;
             }
         }
+
         throw new IllegalArgumentException("Invalid ID" + cod);
+
     }
 
 }

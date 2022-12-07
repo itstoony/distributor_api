@@ -34,4 +34,5 @@ public class ItemsOrders {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
 }
