@@ -2,6 +2,7 @@ package distribuitor.itstoony.com.github.controller;
 
 import distribuitor.itstoony.com.github.model.Costumer;
 import distribuitor.itstoony.com.github.model.dto.CostumerDto;
+import distribuitor.itstoony.com.github.model.dto.CostumerRecord;
 import distribuitor.itstoony.com.github.service.CostumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +22,12 @@ public class CostumerController {
     @Autowired
     private CostumerService costumerService;
 
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insertClients(@RequestBody CostumerDto dto) {
-        Costumer costumer = costumerService.fromDto(dto);
+    @Transactional
+    public ResponseEntity<Void> insertClients(@RequestBody CostumerRecord record) {
+
+        Costumer costumer = costumerService.fromRecord(record);
 
         costumerService.insert(costumer);
 
@@ -58,7 +63,7 @@ public class CostumerController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CostumerDto>> listAllCostumer() {
-        List<CostumerDto> listDto = costumerService.findAll();
+        List<CostumerDto> listDto = costumerService.findAllDto();
         return ResponseEntity.ok().body(listDto);
     }
 

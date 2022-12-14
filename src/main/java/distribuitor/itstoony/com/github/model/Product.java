@@ -1,11 +1,7 @@
 package distribuitor.itstoony.com.github.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +9,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 @Table(name = "product")
 public class Product {
@@ -21,20 +18,23 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Category name shouldn't be empty")
+    @Column(name = "name")
     private String name;
 
-    @NotEmpty(message = "Category description shouldn't be empty")
+    @Column(name = "description")
     private String description;
 
-    @NotEmpty(message = "Category value shouldn't be empty")
+    @Column(name = "value")
     private Double value;
 
-    @OneToMany(mappedBy = "product")
+    @Column(name = "weight")
+    private Double weight;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ItemsOrders> order = new ArrayList<>();
 
-    @ManyToOne
-    private Deposit deposit;
+    @OneToMany(mappedBy = "product")
+    private List<DepositProduct> products = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

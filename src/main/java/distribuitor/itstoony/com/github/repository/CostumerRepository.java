@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientsRepository extends JpaRepository<Costumer, Long> {
+public interface CostumerRepository extends JpaRepository<Costumer, Long> {
 
     Page<Costumer> findAllByName(String name, Pageable pageable);
 

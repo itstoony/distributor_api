@@ -2,16 +2,14 @@ package distribuitor.itstoony.com.github.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +27,7 @@ public class Orders {
     private Double totalValue;
 
     @ManyToOne
-    @JoinColumn(name = "clients_id")
+    @JoinColumn(name = "costumer_id")
     private Costumer costumer;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)

@@ -43,8 +43,12 @@ public class AddressService {
                 .build();
     }
 
-    public void save(Address address) {
+    public void insert(Address address) {
         addressRepository.save(address);
     }
 
+    public Address findByCep(String cep) {
+        AddressDto dto = findCepDto(cep);
+        return fromDto(dto);
+    }
 }

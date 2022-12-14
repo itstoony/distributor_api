@@ -1,6 +1,8 @@
 package distribuitor.itstoony.com.github.model;
 
+import distribuitor.itstoony.com.github.model.authentication.CostumerAccount;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
@@ -9,7 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "costumer")
@@ -24,7 +26,15 @@ public class Costumer {
     private String name;
 
     @CPF
+    @Column(name = "cpf")
     private String cpf;
+
+    @Email
+    @Column(name = "email")
+    private String email;
+
+    @OneToOne
+    private CostumerAccount account;
 
     private LocalDate registrationDate;
 

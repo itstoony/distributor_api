@@ -1,19 +1,18 @@
 package distribuitor.itstoony.com.github.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Complement class
 @Entity
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
+@ToString
 @Table(name = "deposit")
 public class Deposit {
 
@@ -21,10 +20,16 @@ public class Deposit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "deposit")
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "deposit", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<DepositProduct> products = new ArrayList<>();
+
 
     @OneToOne(mappedBy = "deposit")
     private Address address;
+
+    public void setProducts(List<DepositProduct> products) {
+        this.products = products;
+    }
 
 }

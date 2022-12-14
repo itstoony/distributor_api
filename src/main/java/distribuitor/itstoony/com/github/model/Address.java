@@ -6,13 +6,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "address")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Address {
 
     @Id
@@ -48,5 +48,6 @@ public class Address {
 
     @JsonIgnore
     private AddressType addressType;
+
 
 }

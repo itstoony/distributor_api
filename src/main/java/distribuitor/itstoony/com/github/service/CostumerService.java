@@ -2,9 +2,11 @@ package distribuitor.itstoony.com.github.service;
 
 import distribuitor.itstoony.com.github.model.Address;
 import distribuitor.itstoony.com.github.model.Costumer;
+import distribuitor.itstoony.com.github.model.authentication.CostumerAccount;
 import distribuitor.itstoony.com.github.model.dto.AddressDto;
 import distribuitor.itstoony.com.github.model.dto.CostumerDto;
-import distribuitor.itstoony.com.github.repository.ClientsRepository;
+import distribuitor.itstoony.com.github.model.dto.CostumerRecord;
+import distribuitor.itstoony.com.github.repository.CostumerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +25,10 @@ public class CostumerService {
     private AddressService addressService;
 
     @Autowired
-    private ClientsRepository clientsRepository;
+    private CostumerRepository clientsRepository;
+
+    @Autowired
+    private CostumerAccountService costumerAccountService;
 
     public Costumer fromDto(CostumerDto dto) {
 
@@ -44,10 +49,35 @@ public class CostumerService {
         return costumer;
     }
 
+
+    public Costumer fromRecord(CostumerRecord record) {
+
+        AddressDto dto = addressService.findCepDto(record.cep());
+
+        Address address = addressService.fromDto(dto);
+
+        CostumerAccount account = record.account();
+
+        Costumer costumer = Costumer.builder()
+                .name(record.name())
+                .cpf(record.cpf())
+                .email(record.email())
+                .address(address)
+                .registrationDate(LocalDate.now())
+                .account(account)
+                .build();
+
+        address.setCostumer(costumer);
+        account.setCostumer(costumer);
+        addressService.setAddressType(costumer.getAddress());
+
+        return costumer;
+    }
+
     @Transactional
     public void insert(Costumer costumer) {
         costumer.setId(null);
-        addressService.save(costumer.getAddress());
+        addressService.insert(costumer.getAddress());
         clientsRepository.save(costumer);
     }
 
@@ -60,7 +90,7 @@ public class CostumerService {
         return clientsRepository.findById(id);
     }
 
-    public List<CostumerDto> findAll() {
+    public List<CostumerDto> findAllDto() {
         List<Costumer> listClients = clientsRepository.findAll();
 
         List<CostumerDto> listDto = new ArrayList<>();
@@ -70,6 +100,10 @@ public class CostumerService {
         }
 
         return listDto;
+    }
+
+    public List<Costumer> findAll(){
+        return clientsRepository.findAll();
     }
 
     private CostumerDto ConvertToDto(Costumer costumer) {
@@ -102,7 +136,7 @@ public class CostumerService {
     public Costumer update(Long id, CostumerDto updated) {
         AddressDto addressDto = addressService.findCepDto(updated.getCep());
         Address address = addressService.fromDto(addressDto);
-        addressService.save(address);
+        addressService.insert(address);
 
         Costumer costumer = findById(id);
         costumer.setName(updated.getName());
